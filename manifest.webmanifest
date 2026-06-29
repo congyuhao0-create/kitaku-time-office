@@ -1,0 +1,20 @@
+{
+  "name": "Kitaku Time Office",
+  "short_name": "Kitaku Time",
+  "description": "親子共有オフィス内で動く時間銀行",
+  "id": "/",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5faf8",
+  "theme_color": "#00635f",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
