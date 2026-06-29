@@ -1,6 +1,8 @@
 cloudflared-*.log
 screen-*.png
 *.tmp
+.env
+*.env
 .DS_Store
 node_modules/
 .vercel/
