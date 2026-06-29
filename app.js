@@ -41,6 +41,7 @@ let supabaseChannel = null;
 let realDataChannel = null;
 let cloudApplyingRemote = false;
 let supabaseCreateClient = null;
+const APP_MODE = document.body?.dataset.appMode === "admin" ? "admin" : "user";
 
 const demoUsers = {
   parent: {
@@ -696,21 +697,54 @@ function noAvailableSlots() {
 
 function render() {
   ensureBookingDefaults();
-  document.querySelector("#root").innerHTML = `
-    <div class="app mobile-first">
-      <header class="top-strip compact-top">
-        <div>${logo()}<div><strong>Kitaku Time Office</strong><span>親子共有オフィス内で動く時間銀行</span></div></div>
-        <button type="button" data-tab="checkin">${icon("qr")}前台</button>
-      </header>
-      <div class="workspace mobile-workspace">
+  document.querySelector("#root").innerHTML = APP_MODE === "admin" ? adminApp() : userApp();
+  bindEvents();
+}
+
+function userApp() {
+  return `
+    <div class="app app-user mobile-first">
+      <div class="workspace mobile-workspace user-workspace">
         ${phoneShell()}
-        ${operatorPreview()}
       </div>
       ${state.toast ? `<div class="toast" role="status">${icon("check")}${state.toast}</div>` : ""}
       ${state.modal ? modalView() : ""}
     </div>
   `;
-  bindEvents();
+}
+
+function adminApp() {
+  return `
+    <div class="app app-admin">
+      <header class="top-strip admin-top">
+        <div>${logo()}<div><strong>Kitaku Time Office Admin</strong><span>予約・サービス・台帳・安全記録を管理</span></div></div>
+        <div class="admin-top-actions">
+          <a href="./" class="admin-link-button">${icon("home")}利用者アプリ</a>
+          ${state.isAuthenticated ? `<button type="button" data-logout>${icon("lock")}ログアウト</button>` : ""}
+        </div>
+      </header>
+      <div class="admin-workspace">
+        ${adminContent()}
+      </div>
+      ${state.toast ? `<div class="toast" role="status">${icon("check")}${state.toast}</div>` : ""}
+      ${state.modal ? modalView() : ""}
+    </div>
+  `;
+}
+
+function adminContent() {
+  if (!state.isAuthenticated) {
+    return `
+      <section class="admin-login-shell admin-login-only">
+        ${authScreen()}
+        <aside class="admin-login-note">
+          <h2>后台は利用者アプリと分離されています</h2>
+          <p>予約申請、公開需求、接単、時間台帳、安全記録はここで確認します。運営者アカウントでログインしてください。</p>
+        </aside>
+      </section>
+    `;
+  }
+  return operatorPreview();
 }
 
 function phoneShell() {
@@ -1678,6 +1712,7 @@ function logout() {
 }
 
 function shouldShowIntro() {
+  if (APP_MODE === "admin") return false;
   return !state.introDismissed && localStorage.getItem("kitaku-intro-dismissed") !== "1";
 }
 

@@ -1,4 +1,10 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "rewrites": [
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    }
+  ]
 }

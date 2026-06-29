@@ -1,7 +1,8 @@
-const CACHE_NAME = "kitaku-time-office-v1";
+const CACHE_NAME = "kitaku-time-office-v2";
 const APP_SHELL = [
   "./",
   "./index.html",
+  "./admin.html",
   "./app.js",
   "./src/styles.css",
   "./manifest.webmanifest",

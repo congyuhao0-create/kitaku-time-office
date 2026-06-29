@@ -46,3 +46,10 @@ After Vercel gives you an HTTPS URL:
 - Android Chrome: open the URL -> menu -> Add to Home screen.
 
 The app includes `manifest.webmanifest` and `sw.js`, so it opens in standalone PWA style after installation.
+
+## 5. App URLs
+
+- User PWA: `/`
+- Operator admin: `/admin` or `/admin.html`
+
+The user PWA is optimized for iPhone safe areas. The operator admin is separated for desktop operation and reads the same Supabase data.

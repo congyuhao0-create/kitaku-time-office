@@ -34,6 +34,8 @@ body {
   margin: 0;
   min-width: 320px;
   background: var(--bg);
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 button,
@@ -53,9 +55,96 @@ button:disabled {
 
 .app {
   min-height: 100vh;
+  min-height: 100dvh;
   position: relative;
   overflow: hidden;
   padding: 24px;
+}
+
+.app-user {
+  padding: 0;
+  display: grid;
+  place-items: center;
+  background: #eaf2ef;
+}
+
+.user-workspace {
+  display: block;
+  width: min(100vw, 430px);
+  max-width: 430px;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0 auto;
+}
+
+.app-admin {
+  overflow: auto;
+}
+
+.admin-workspace {
+  position: relative;
+  z-index: 1;
+  max-width: 1500px;
+  margin: 0 auto;
+  display: grid;
+  gap: 22px;
+}
+
+.admin-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-link-button {
+  border: 1px solid rgba(0, 99, 95, 0.24);
+  background: var(--paper);
+  color: var(--teal-800);
+  border-radius: 6px;
+  min-height: 38px;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 700;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.admin-login-shell {
+  width: min(100%, 980px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(320px, 520px) 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+.admin-login-only .auth-flow {
+  padding-top: 0;
+}
+
+.admin-login-note {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: var(--shadow-soft);
+  padding: 22px;
+  display: grid;
+  gap: 10px;
+}
+
+.admin-login-note h2 {
+  color: var(--teal-800);
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.admin-login-note p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
 }
 
 .ambient-grid {
@@ -176,6 +265,29 @@ td button,
   overflow: hidden;
   display: grid;
   grid-template-rows: 30px 82px 1fr 78px;
+}
+
+.app-user .phone-shell {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  grid-template-rows: 0 auto 1fr auto;
+}
+
+.app-user .phone-top {
+  display: none;
+}
+
+.app-user .mobile-header {
+  padding-top: calc(12px + env(safe-area-inset-top));
+}
+
+.app-user .mobile-content {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .phone-top {
@@ -532,6 +644,11 @@ p {
   background: white;
 }
 
+.app-user .bottom-nav {
+  padding-bottom: env(safe-area-inset-bottom);
+  min-height: calc(72px + env(safe-area-inset-bottom));
+}
+
 .bottom-nav button {
   border: 0;
   background: transparent;
@@ -543,6 +660,12 @@ p {
   min-width: 0;
   min-height: 70px;
   padding: 6px 2px;
+}
+
+.app-user .bottom-nav button {
+  min-height: 72px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .bottom-nav button span {
@@ -1741,6 +1864,10 @@ p {
   min-width: 0;
 }
 
+.dashboard-shell.phone-secondary {
+  grid-template-columns: 1fr;
+}
+
 .sidebar {
   background: linear-gradient(180deg, var(--teal-900), #006c65);
   color: white;
@@ -2379,6 +2506,21 @@ select:focus-visible {
     border-width: 5px;
   }
 
+  .app-user .phone-shell {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    border-width: 0;
+  }
+
+  .app-user .workspace {
+    gap: 0;
+  }
+
+  .app-user .screen-flow {
+    padding: 16px;
+  }
+
   .workspace {
     gap: 14px;
   }
@@ -2401,7 +2543,8 @@ select:focus-visible {
   .dashboard-grid,
   .donut-wrap,
   .backend-console-grid,
-  .cloud-fields {
+  .cloud-fields,
+  .admin-login-shell {
     grid-template-columns: 1fr;
   }
 
