@@ -1,7 +1,7 @@
 {
   "name": "Kitaku Time Office",
   "short_name": "Kitaku Time",
-  "description": "親子共有オフィス内で動く時間銀行",
+  "description": "\u89aa\u5b50\u5171\u6709\u30aa\u30d5\u30a3\u30b9\u5185\u3067\u52d5\u304f\u6642\u9593\u9280\u884c",
   "id": "/",
   "start_url": "/",
   "scope": "/",
@@ -11,10 +11,22 @@
   "orientation": "portrait",
   "icons": [
     {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
       "src": "./icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }

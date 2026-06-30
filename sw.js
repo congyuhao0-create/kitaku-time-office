@@ -1,4 +1,4 @@
-const CACHE_NAME = "kitaku-time-office-v2";
+const CACHE_NAME = "kitaku-time-office-v4";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -6,6 +6,9 @@ const APP_SHELL = [
   "./app.js",
   "./src/styles.css",
   "./manifest.webmanifest",
+  "./apple-touch-icon.png",
+  "./icon-192.png",
+  "./icon-512.png",
   "./icon.svg"
 ];
 

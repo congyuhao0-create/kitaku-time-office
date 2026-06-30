@@ -2233,10 +2233,15 @@ async function logOperatorAction(action, targetTable, targetId, details = {}) {
 }
 
 function update(next) {
+  const previousTab = state.tab;
+  const shouldResetMobileScroll = APP_MODE === "user" && Object.prototype.hasOwnProperty.call(next, "tab") && next.tab !== previousTab;
   Object.assign(state, next);
   saveState();
   scheduleCloudSave();
   render();
+  if (shouldResetMobileScroll) {
+    requestAnimationFrame(() => document.querySelector(".mobile-content")?.scrollTo({ top: 0, left: 0, behavior: "auto" }));
+  }
   if (next.toast) setTimeout(() => {
     state.toast = "";
     render();

@@ -2957,3 +2957,747 @@ select:focus-visible {
   color: inherit !important;
   padding: 0 !important;
 }
+
+/* Production mobile polish layer. Keeps the existing app logic, but locks the
+   visual system for iPhone PWA use: one accent, one radius scale, one tap size. */
+:root {
+  --app-bg: #edf4f1;
+  --surface: #fffffc;
+  --surface-soft: #f5faf8;
+  --tap: 44px;
+  --tap-sm: 38px;
+  --text-strong: #102725;
+  --text-muted: #5e706d;
+  --shadow: 0 16px 42px rgba(15, 64, 60, 0.11);
+  --shadow-soft: 0 1px 2px rgba(15, 64, 60, 0.08);
+  color-scheme: light;
+}
+
+html {
+  width: 100%;
+  min-width: 320px;
+  background: var(--app-bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+  color: var(--text-strong);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  touch-action: manipulation;
+}
+
+button:disabled {
+  opacity: 0.56;
+}
+
+.app-user {
+  align-items: start;
+  min-height: 100dvh;
+  background: var(--app-bg);
+}
+
+.user-workspace {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100dvh;
+}
+
+.app-user .phone-shell {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "mobile-header"
+    "mobile-content"
+    "bottom-nav";
+  min-height: 100dvh;
+  background: var(--surface);
+}
+
+.app-user .mobile-header {
+  grid-area: mobile-header;
+  min-height: calc(76px + env(safe-area-inset-top));
+  padding: calc(18px + env(safe-area-inset-top)) 16px 12px;
+  background: rgba(255, 255, 252, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.app-user .mobile-content {
+  grid-area: mobile-content;
+  min-height: 0;
+}
+
+.app-user .bottom-nav {
+  grid-area: bottom-nav;
+}
+
+.mobile-brand {
+  min-width: 0;
+}
+
+.mobile-brand > div {
+  min-width: 0;
+}
+
+.mobile-brand strong {
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.mobile-brand span {
+  max-width: 238px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.brand-mark svg {
+  width: 27px;
+  height: 27px;
+  stroke-width: 2.7;
+}
+
+.round-action {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  border-radius: 999px;
+}
+
+.round-action svg {
+  width: 20px;
+  height: 20px;
+}
+
+.mobile-content {
+  background: linear-gradient(180deg, #fbfdfc 0%, #f2f7f5 100%);
+}
+
+.screen-flow {
+  padding: 16px;
+  gap: 14px;
+}
+
+.screen-title {
+  gap: 6px;
+}
+
+.screen-title h1 {
+  font-size: 21px;
+  line-height: 1.28;
+  letter-spacing: 0;
+}
+
+.screen-title p {
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.panel,
+.balance-card,
+.dash-panel,
+.metric,
+.service-card,
+.boundary-panel,
+.empty-state,
+.notice,
+.partner,
+.auth-card,
+.auth-demo,
+.profile-card,
+.account-panel,
+.benefit-balance,
+.benefit-card,
+.ledger-list {
+  background: var(--surface);
+  border-color: #d9e6e2;
+  border-radius: 8px;
+  box-shadow: var(--shadow-soft);
+}
+
+.panel,
+.auth-card,
+.auth-demo,
+.publish-form,
+.account-panel,
+.boundary-panel,
+.ledger-list {
+  padding: 16px;
+}
+
+.panel-title h2,
+.section-line h2,
+.panel-heading h2,
+.service-toggle h2 {
+  font-size: 15px;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.location-row {
+  min-height: 34px;
+  max-width: 100%;
+  padding: 0 2px;
+}
+
+.location-row span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.primary-button,
+.secondary-button,
+.admin-link-button,
+.top-strip button,
+.balance-card button,
+.service-card > button:not(.service-open):not(.custom-card-main),
+.benefit-balance button,
+.benefit-card > button,
+.slot-actions button,
+.row-actions button,
+.schedule-head > button:not(.schedule-toggle),
+.service-section-head > button:not(.service-toggle),
+.section-line button,
+.panel-heading button,
+.modal-card header button,
+td button {
+  min-height: var(--tap-sm);
+  min-width: 44px;
+  border-radius: 7px;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: none;
+}
+
+.primary-button {
+  min-height: var(--tap);
+}
+
+.auth-form .primary-button,
+.publish-form .primary-button,
+.modal-actions .primary-button,
+.modal-actions .secondary-button {
+  width: 100%;
+}
+
+.auth-form .secondary-button,
+.publish-form .secondary-button {
+  min-height: var(--tap);
+}
+
+.primary-button,
+.slot-actions button:first-child,
+.top-strip button {
+  background: var(--teal-800);
+}
+
+.secondary-button,
+.balance-card button,
+.benefit-balance button,
+.benefit-card > button,
+.slot-actions button:last-child,
+.row-actions button,
+.schedule-head > button:not(.schedule-toggle),
+.service-section-head > button:not(.service-toggle),
+.section-line button,
+.panel-heading button,
+.modal-card header button {
+  background: #fffffc;
+  color: var(--teal-800);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  button,
+  .service-card,
+  .benefit-card,
+  .slot-row,
+  .icon-button {
+    transition: transform 140ms ease, border-color 140ms ease, background-color 140ms ease, box-shadow 140ms ease;
+  }
+
+  button:active,
+  .service-card:active,
+  .benefit-card:active,
+  .slot-row:active,
+  .icon-button:active {
+    transform: translateY(1px);
+  }
+}
+
+.bottom-nav {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  min-height: calc(66px + env(safe-area-inset-bottom));
+  padding: 0 4px env(safe-area-inset-bottom);
+  background: rgba(255, 255, 252, 0.97);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.bottom-nav button {
+  position: relative;
+  min-height: 66px;
+  padding: 7px 1px 6px;
+  gap: 3px;
+}
+
+.bottom-nav button::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  width: 18px;
+  height: 3px;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.bottom-nav button.selected::before {
+  background: var(--teal-800);
+}
+
+.bottom-nav svg {
+  width: 22px !important;
+  height: 22px !important;
+  stroke-width: 2.1;
+}
+
+.bottom-nav span {
+  max-width: 48px;
+  min-height: 22px;
+  font-size: 10px;
+  line-height: 1.12;
+  letter-spacing: 0;
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
+
+.quick-grid {
+  gap: 8px;
+}
+
+.icon-button {
+  min-height: 70px;
+  padding: 8px 6px;
+  gap: 5px;
+}
+
+.icon-button svg {
+  width: 23px;
+  height: 23px;
+  stroke-width: 2.1;
+}
+
+.icon-button span {
+  font-size: 11px;
+  line-height: 1.18;
+}
+
+.today-panel {
+  padding: 16px;
+}
+
+.today-toggle {
+  grid-template-columns: minmax(0, 1fr) auto 24px;
+  min-height: 44px;
+}
+
+.today-toggle h2 {
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.today-toggle span,
+.today-toggle strong {
+  white-space: nowrap;
+}
+
+.booking-row {
+  padding: 12px 0;
+  gap: 10px;
+}
+
+.booking-detail h3,
+.slot-main strong,
+.service-card h3,
+.benefit-card h3,
+.custom-card-body h3 {
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.booking-row p,
+.service-card p,
+.service-card span,
+.slot-main span,
+.benefit-card p,
+.benefit-card small,
+.custom-card-body span,
+.custom-card-body small {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.row-actions {
+  max-width: 124px;
+  gap: 5px;
+  justify-content: flex-end;
+}
+
+.pill {
+  min-height: 26px;
+  padding: 0 9px;
+  font-size: 11px;
+}
+
+.balance-card,
+.benefit-balance {
+  padding: 16px;
+  align-items: center;
+}
+
+.balance-card strong,
+.benefit-balance strong {
+  font-size: 34px;
+  letter-spacing: 0;
+}
+
+.balance-card strong::after,
+.benefit-balance strong::after {
+  content: " 時間";
+}
+
+.service-zone {
+  gap: 12px;
+}
+
+.service-section-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.service-toggle,
+.schedule-toggle {
+  min-height: 42px;
+}
+
+.service-toggle i,
+.schedule-toggle i,
+.today-toggle i {
+  width: 24px;
+  height: 24px;
+}
+
+.service-list,
+.booking-list,
+.notice-list,
+.ledger-list {
+  gap: 10px;
+}
+
+.service-card {
+  min-height: 78px;
+  grid-template-columns: 46px minmax(0, 1fr) auto;
+  gap: 11px;
+  padding: 12px;
+}
+
+.service-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 8px;
+}
+
+.service-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.custom-request-card {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.custom-request-card > .custom-card-main,
+.custom-card-main {
+  grid-template-columns: 54px minmax(0, 1fr) !important;
+  gap: 11px;
+}
+
+.custom-photo-thumb {
+  width: 54px;
+  min-height: 62px;
+  border-radius: 8px;
+}
+
+.custom-photo-thumb svg {
+  width: 21px;
+  height: 21px;
+}
+
+.custom-card-body p {
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.custom-card-body small {
+  overflow-wrap: anywhere;
+}
+
+.benefit-zone {
+  gap: 13px;
+}
+
+.benefit-scroll {
+  grid-auto-columns: minmax(216px, 76%);
+  gap: 12px;
+  padding: 2px 8px 10px 2px;
+  scroll-padding-left: 2px;
+}
+
+.benefit-card {
+  gap: 9px;
+  padding: 10px;
+}
+
+.benefit-main {
+  gap: 8px;
+}
+
+.benefit-visual {
+  min-height: 106px;
+  border-radius: 8px;
+}
+
+.benefit-visual span {
+  font-size: 24px;
+  max-width: 90%;
+}
+
+.benefit-cost {
+  min-height: 28px;
+}
+
+.benefit-cost span {
+  border-radius: 6px;
+}
+
+.benefit-note {
+  min-height: 54px;
+  padding: 12px;
+  border: 1px solid #d8e1f2;
+}
+
+.segmented,
+.date-strip,
+.time-wheel,
+.benefit-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+.segmented button,
+.date-strip button,
+.time-wheel button,
+.slot-list button {
+  min-height: 38px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.date-strip {
+  grid-auto-columns: minmax(68px, 22%);
+  scroll-snap-type: x proximity;
+}
+
+.date-strip button {
+  min-height: 58px;
+  scroll-snap-align: start;
+}
+
+.time-wheel {
+  grid-auto-columns: minmax(76px, 24%);
+}
+
+.booking-type-switch button {
+  min-height: 70px;
+  border-radius: 8px;
+}
+
+.slot-row {
+  min-height: 70px;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.slot-actions,
+.row-actions,
+.modal-actions {
+  gap: 7px;
+}
+
+.modal-backdrop {
+  padding: 10px;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom));
+}
+
+.modal-card {
+  border-radius: 12px;
+}
+
+.modal-card header {
+  padding: 14px 16px;
+}
+
+.modal-body {
+  padding: 16px;
+}
+
+.modal-body dl {
+  grid-template-columns: 82px minmax(0, 1fr);
+  gap: 8px 10px;
+}
+
+.modal-input,
+.select-field select,
+.dashboard-actions select,
+.backend-form select {
+  min-height: var(--tap);
+  border-radius: 7px;
+  background: #fffffc;
+}
+
+.textarea-input {
+  min-height: 112px;
+}
+
+.empty-state {
+  min-height: 50px;
+  padding: 12px;
+  line-height: 1.45;
+}
+
+.toast {
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  max-width: calc(100vw - 28px);
+}
+
+.dashboard-shell {
+  border-radius: 10px;
+}
+
+.app-admin {
+  padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+}
+
+@media (min-width: 431px) {
+  .app-user {
+    padding: 18px;
+  }
+
+  .user-workspace {
+    overflow: hidden;
+    border: 1px solid rgba(0, 99, 95, 0.12);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    min-height: auto;
+    height: min(900px, calc(100dvh - 36px));
+  }
+
+  .app-user .phone-shell {
+    height: 100%;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .screen-flow {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .bottom-nav span {
+    max-width: 44px;
+    font-size: 9.5px;
+  }
+
+  .quick-grid {
+    gap: 7px;
+  }
+
+  .icon-button {
+    min-height: 66px;
+    padding-inline: 4px;
+  }
+
+  .service-card {
+    grid-template-columns: 42px minmax(0, 1fr) auto;
+    gap: 9px;
+    padding: 11px;
+  }
+
+  .service-icon,
+  .custom-photo-thumb {
+    width: 42px;
+  }
+
+  .custom-request-card > .custom-card-main,
+  .custom-card-main {
+    grid-template-columns: 46px minmax(0, 1fr) !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .custom-request-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .custom-request-card > button:not(.custom-card-main) {
+    justify-self: end;
+  }
+
+  .slot-actions,
+  .row-actions {
+    justify-content: flex-end;
+  }
+
+  .modal-backdrop {
+    align-items: end;
+  }
+
+  .modal-card {
+    max-height: calc(100dvh - 20px - env(safe-area-inset-top));
+    border-radius: 14px 14px 8px 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
